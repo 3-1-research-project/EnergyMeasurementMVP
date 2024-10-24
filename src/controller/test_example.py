@@ -20,4 +20,4 @@ def test_docs_has_title(page: Page):
     page.goto("https://playwright.dev/docs/intro")
 
     # Expect a title "to contain" a substring.
-    expect(page).not_to_have_title(re.compile("Playwright"))
+    expect(page).not_to_have_title("Playwright")
