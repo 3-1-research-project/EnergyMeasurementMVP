@@ -10,8 +10,10 @@ class PwPage:
         self.page.click(link_selector)
 
     def submit(self):
-        submit_button = self.page.query_selector("button[type='submit']")
-        self.page.click(submit_button)
+        self.page.click(f"button[type='submit']")
+
+    def submit_input(self):
+        self.page.click(f"input[type='submit']")
 
     def press_button(self, button_name: str):
         button_selector = f"button[name='{button_name}']"
