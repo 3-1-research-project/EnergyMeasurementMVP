@@ -1,0 +1,19 @@
+{
+    "type": "object",
+    "properties": {
+      "FILL_INPUT": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "value": { "type": "string" }
+        },
+        "required": ["name", "value"]
+        
+      }
+    },
+    "required": ["FILL_INPUT"]
+    
+  }
+
+
+  
