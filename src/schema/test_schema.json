@@ -1,0 +1,25 @@
+{
+    "project": "DC",
+    "tasks": [
+        {
+            "action": "SIGN_UP",
+            "subTasks": [
+                {
+                    "PRESS_LINK": {
+                        "name": "Sign Up"
+                    }
+                },
+                {
+                    "FILL_INPUT": {
+                        "name": "Username",
+                        "value": "Test"
+                    }
+                },
+                {
+                    "SUBMIT": {}
+                }
+
+            ]
+        }
+    ]
+}

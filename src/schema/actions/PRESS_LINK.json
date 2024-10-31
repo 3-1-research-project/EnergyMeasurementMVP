@@ -1,0 +1,15 @@
+{
+    "type": "object",
+    "properties": {
+      "PRESS_LINK": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" }
+        },
+        "required": ["name"],
+        "additionalProperties": false
+      }
+    },
+    "required": ["PRESS_LINK"],
+    "additionalProperties": false
+  }
