@@ -1,7 +1,6 @@
 
 from scenario import Scenario
 from config import PwPage, Page
-import pytest
 
 class CustomScenario(Scenario):
     def goToUsersTimeline(self, user):
