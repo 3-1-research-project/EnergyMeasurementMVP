@@ -4,10 +4,6 @@ import config
 class Scenario():
 
     # constructor with url
-
-
-
-
     base: str
 
     def __init__(self, page: config.PwPage, url: str):

@@ -1,0 +1,24 @@
+{
+    "project": "DC",
+    "url": "https://localhost:5000",
+    "tasks": {
+        "SIGN_UP": [
+                {
+                    "PRESS_LINK": {
+                        "name": "Sign Up"
+                    }
+                },
+                {
+                    "FILL_INPUT": {
+                        "name": "Username",
+                        "value": "Test"
+                    }
+                },
+                {
+                    "SUBMIT": {}
+                }
+
+            ],
+        "FOLLOW_USER": []
+    }
+}
