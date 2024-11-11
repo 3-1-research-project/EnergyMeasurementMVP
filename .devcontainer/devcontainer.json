@@ -12,7 +12,8 @@
 			"extensions": [
 				"ms-python.python",
 				"ms-python.debugpy",
-				"GitHub.vscode-pull-request-github"
+				"GitHub.vscode-pull-request-github",
+				"ms-python.black-formatter"
 			]
 		}
 	}
