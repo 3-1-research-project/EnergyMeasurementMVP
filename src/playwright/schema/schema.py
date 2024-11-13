@@ -1,7 +1,7 @@
 import json
 from jsonschema import validate
 
-schema2 = {
+schema = {
   "type": "object",
   "properties": {
     "project": {
@@ -33,12 +33,25 @@ schema2 = {
       "items": {
         "type": "object",
         "oneOf": [
+            {
+                "properties": {
+              "NAVIGATE_TO": {
+                "type": "object",
+                "properties": {
+                  "url": { "type": "string" }
+                },
+                "required": ["url"],
+              }
+            },
+            "required": ["NAVIGATE_TO"],
+          },
           {
             "properties": {
               "PRESS_LINK": {
                 "type": "object",
                 "properties": {
-                  "name": { "type": "string" }
+                  "name": { "type": "string" },
+                  "value": { "type": "string" }
                 },
                 "required": ["name"],
               }
@@ -52,6 +65,7 @@ schema2 = {
                 "properties": {
                   "name": { "type": "string" },
                   "value": { "type": "string" }
+                  
                 },
                 "required": ["name", "value"],
               }
@@ -69,131 +83,37 @@ schema2 = {
             },
             "required": ["SUBMIT"],
           
-          }
+          },
+          # submit input
+          {
+            "properties": {
+              "SUBMIT_INPUT": {
+                "type": "object",
+                "properties": {},
+              
+              }
+            },
+            "required": ["SUBMIT_INPUT"],  
+          },
+         
+          # press button
+          {
+            "properties": {
+              "PRESS_BUTTON": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" }
+                },
+                "required": ["name"],
+              }
+            },
+            "required": ["PRESS_BUTTON"],  
+          },
+          
         ]
       }
     }
   }
-}
-
-
-schema = {
-  "type": "object",
-  "properties": {
-    "project" : { "type": "string"},
-    "url" : { "type": "string"},
-    "tasks": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "action": {
-            "type": "string",
-            "enum": ["SIGN_UP", "FOLLOW_USER", "SIGN_IN", "GO_TO_PUBLIC", "GO_TO_USERS", "GO_TO_MY", "POST", "SIGN_OUT", "UNFOLLOW_USER"]
-          },
-          "subTasks": {
-            "type": "array",
-            "items": {
-              "oneOf": [
-                { # PRESS_LINK
-                "type": "object",
-                "properties": {
-                  "PRESS_LINK": {
-                    "type": "object",
-                    "properties": {
-                      "name": { "type": "string" }
-                    },
-                    "required": ["name"]
-                  }
-                },
-                "required": ["PRESS_LINK"]
-              },
-              { # FILL_INPUT
-                "type": "object",
-                "properties": {
-                  "FILL_INPUT": {
-                    "type": "object",
-                    "properties": {
-                      "name": { "type": "string" },
-                      "value": { "type": "string" }
-                    },
-                    "required": ["name", "value"]
-                  }
-                },
-                "required": ["FILL_INPUT"]
-              },
-                { # Submit
-                    "type": "object",
-                    "properties": {
-                    "SUBMIT": {
-                        "type": "object",
-                        "properties": {},
-                        "required": [],
-                    
-                    }
-                    },
-                    "required": ["SUBMIT"],
-                
-                }
-
-                ,
-                { # Submit input
-                    "type": "object",
-                    "properties": {
-                    "SUBMIT_INPUT": {
-                        "type": "object",
-                        "properties": {},
-                        "required": [],
-                    
-                    }
-                    },
-                    "required": ["SUBMIT_INPUT"],
-                
-                }
-
-                ,
-                { # Press button
-                    "type": "object",
-                    "properties": {
-                    "PRESS_BUTTON": {
-                        "type": "object",
-                        "properties": {
-                        "button_name": { "type": "string" }
-                        },
-                        "required": ["button_name"],
-                    
-                    }
-                    },
-                    "required": ["PRESS_BUTTON"],
-                
-                }
-
-                ,
-                { # Navigate to
-                    "type": "object",
-                    "properties": {
-                    "NAVIGATE_TO": {
-                        "type": "object",
-                        "properties": {
-                        "url": { "type": "string" }
-                        },
-                        "required": ["url"],
-                    
-                    }
-                    },
-                    "required": ["NAVIGATE_TO"],
-                
-                },
-                            
-              ] 
-            },
-          }
-        },
-        "required": ["action"],
-      }
-    }
-  },
-  "required": ["tasks", "project"],
 }
 
 def validate_schema(path) -> dict:
@@ -202,10 +122,7 @@ def validate_schema(path) -> dict:
 
     validate(
         instance=instance,
-        schema=schema2,
+        schema=schema,
     )
-
-    print("Printing instance...")
-    print(instance)
 
     return instance

@@ -2,7 +2,7 @@
 from scenario import Scenario
 from config import PwPage, Page
 
-class CustomScenario(Scenario):
+class DefaultScenario(Scenario):
     def __init__(self, page, url):
         super().__init__(page, url)
 
@@ -27,5 +27,5 @@ class CustomScenario(Scenario):
 
 
 def test_custom_scenario(page: Page):
-    scenario = CustomScenario(PwPage(page))
+    scenario = DefaultScenario(PwPage(page))
     scenario.run()

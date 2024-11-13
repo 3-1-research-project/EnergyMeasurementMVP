@@ -11,7 +11,25 @@
                 {
                     "FILL_INPUT": {
                         "name": "Username",
-                        "value": "Test"
+                        "value": "username"
+                    }
+                },
+                {
+                    "FILL_INPUT": {
+                        "name": "Email",
+                        "value": "email"
+                    }
+                },
+                {
+                    "FILL_INPUT": {
+                        "name": "Password",
+                        "value": "password"
+                    }
+                },
+                {
+                    "FILL_INPUT": {
+                        "name": "Password2",
+                        "value": "password"
                     }
                 },
                 {
@@ -19,6 +37,41 @@
                 }
 
             ],
-        "FOLLOW_USER": []
+        "FOLLOW_USER": [
+                {
+                    "NAVIGATE_TO": {
+                        "url": "public"
+                    }
+                },
+                {
+                    "PRESS_LINK": {
+                        "name": "",
+                        "value": "user"
+                    }
+                },
+                {
+                    "PRESS_BUTTON": {
+                        "name": "Follow user"
+                    }
+                }
+        ],
+        "UNFOLLOW_USER": [
+                {
+                    "NAVIGATE_TO": {
+                        "url": "public"
+                    }
+                },
+                {
+                    "PRESS_LINK": {
+                        "name": "",
+                        "value": "user"
+                    }
+                },
+                {
+                    "PRESS_BUTTON": {
+                        "name": "Unfollow user"
+                    }
+                }
+        ]
     }
 }
