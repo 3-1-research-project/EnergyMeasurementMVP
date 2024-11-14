@@ -1,4 +1,5 @@
 {
+    "version": "0.2.0",
     "configurations": [
         {
             "name": "client-web-trigger-debugger",
@@ -19,6 +20,15 @@
             "type": "chrome",
             "url": "",
             "webRoot": "${workspaceFolder}/frontend/"
+        },
+        {
+            "name": "seed-debug",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "seed.py",
+            "cwd": "${workspaceFolder}/database-seed/",
+            "console": "integratedTerminal",
+            "args": ["<user register endpoint>", "<tweet endpoint>", "<amount of users>", "<tweet per user>"]
         }
     ]
 }

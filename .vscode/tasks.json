@@ -10,6 +10,48 @@
                 "${workspaceFolder}/frontend/index.html"
             ],
             "problemMatcher": []
+        },
+        {
+            "label": "seed-run",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "seed.py",
+                "${input:registerUserEndpoint}",
+                "${input:tweetEndpoint}",
+                "${input:userAmount}",
+                "${input:tweetPerUserAmount}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/database-seed/"
+            },
+            "problemMatcher": []
         }
+    ],
+    "inputs": [
+            {
+                "id": "registerUserEndpoint",
+                "type": "promptString",
+                "description": "Enter the register user endpoint URL",
+                "default": "http://localhost:5000/api/register"
+            },
+            {
+                "id": "tweetEndpoint",
+                "type": "promptString",
+                "description": "Enter the tweet endpoint URL",
+                "default": "http://localhost:5000/api/msgs"
+            },
+            {
+                "id": "userAmount",
+                "type": "promptString",
+                "description": "Enter the number of users to create",
+                "default": "10"
+            },
+            {
+                "id": "tweetPerUserAmount",
+                "type": "promptString",
+                "description": "Enter the number of tweets per user",
+                "default": "10"
+            }
     ]
 }

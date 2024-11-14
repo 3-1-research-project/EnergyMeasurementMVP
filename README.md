@@ -16,3 +16,6 @@ Navigate to the [./minitwit-implementations/](./minitwit-implementations/) folde
 
 ### 3. Init
 This is work in progress
+
+## Seeding the database
+For some scenarios, the database needs to be pre-seeded, which can be done using the [seed.py](/database-seed/README.md) script. For instructions on running the script, see the corresponding [README.md](/database-seed/README.md).
