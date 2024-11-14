@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "name": "client-web-trigger-debugger",
+            "type": "debugpy",
+            "request": "launch",
+            // "program": "${workspaceFolder}/web/web.py",
+            "module": "fastapi",
+            "args": [
+                "dev",
+                "web.py"
+            ],
+            "jinja": true,
+            "cwd": "${workspaceFolder}/client-api-trigger/"
+        },
+        {
+            "name": "chrome-launch",
+            "request": "launch",
+            "type": "chrome",
+            "url": "",
+            "webRoot": "${workspaceFolder}/frontend/"
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "chrome-launch",
+            "type": "shell",
+            "command": "google-chrome",
+            "args": [
+                "--new-window",
+                "${workspaceFolder}/frontend/index.html"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}
