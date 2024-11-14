@@ -1,4 +1,3 @@
-
 from schema.parser import ScenarioParser
 from scenario_DevopsGroupC import DefaultScenario
 from playwright.sync_api import sync_playwright
@@ -7,12 +6,13 @@ import argparse
 from schema.schema import validate_schema
 import logging
 
+
 def main(url, schema_path):
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False)
         logging.debug("Browser launched")
         page = PwPage(browser.new_page())
-        if (schema_path != None):
+        if schema_path != None:
             logging.info("Verifiying schema...")
             validated_schema = validate_schema(schema_path)
             logging.info("Schema validated: " + str(validated_schema["project"]))
@@ -27,7 +27,6 @@ def main(url, schema_path):
         logging.info("Done")
         browser.close()
 
-    
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run Playwright scenarios")
@@ -38,5 +37,3 @@ if __name__ == "__main__":
     logging.info("Url: " + args.url)
     logging.info("Schema: " + args.schema)
     main(args.url, args.schema)
-
-
