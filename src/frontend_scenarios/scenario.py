@@ -85,33 +85,34 @@ class Scenario:
     def scenario(self):
         # --- New User Scenario ---
         self.getPublicTimeline()
-        self.signUp("test1", "test1@test.com", "1234")
-        self.signIn("test1", "1234")
+        self.signUp("testuser1", "testuser1@test.com", "1234")
+        self.signIn("testuser1", "1234")
         self.post()
         self.signOut()
-        self.signUp("test2", "test2@test.com", "4321")
-        self.signIn("test2", "4321")
+        self.signUp("testuser2", "testuser2@test.com", "4321")
+        self.signIn("testuser2", "4321")
         self.post()
         self.signOut()
+        self.goToUsersTimeline("testuser1")
         # -------------------------
         for i in range(10):
             self.signIn(
-                "test1", "1234"
+                "testuser1", "1234"
             )  # With seeded user login, Swap user1 and password1 with login information
             self.goToMyTimeline()
             self.getPublicTimeline()
             for i in range(3):
-                self.followUser("test2")
-                self.unfollowUser("test2")
+                self.followUser("testuser2")
+                self.unfollowUser("testuser2")
                 self.post()
             self.signOut()
             self.signIn(
-                "test2", "4321"
+                "testuser2", "4321"
             )  # With seeded user login, Swap user1 and password1 with login information
             self.goToMyTimeline()
             self.getPublicTimeline()
             for i in range(3):
-                self.followUser("test1")
-                self.unfollowUser("test1")
+                self.followUser("testuser1")
+                self.unfollowUser("testuser1")
                 self.post()
             self.signOut()

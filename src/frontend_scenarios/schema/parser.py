@@ -87,7 +87,8 @@ class ScenarioParser(Scenario):
 
                 case "FILL_INPUT":
                     input_name = params.get("name")
-                    self.page.fill_input(input_name, kwargs.get(params.get("value")))
+                    value = params.get("value")
+                    self.page.fill_input(input_name, kwargs.get(value))
                 case "SUBMIT":
                     self.page.submit()
                 case "PRESS_BUTTON":
