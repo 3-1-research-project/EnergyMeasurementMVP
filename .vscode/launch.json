@@ -5,14 +5,25 @@
             "name": "client-web-trigger-debugger",
             "type": "debugpy",
             "request": "launch",
-            // "program": "${workspaceFolder}/web/web.py",
             "module": "fastapi",
             "args": [
                 "dev",
                 "web.py"
             ],
             "jinja": true,
-            "cwd": "${workspaceFolder}/client-api-trigger/"
+            "cwd": "${workspaceFolder}/src/"
+        },
+        {
+            "name": "frontend-scenario-debug",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "fastapi",
+            "args": [
+                "dev",
+                "web.py"
+            ],
+            "jinja": true,
+            "cwd": "${workspaceFolder}/src/"
         },
         {
             "name": "chrome-launch",

@@ -1,6 +1,7 @@
 import re
 from playwright.sync_api import Page, expect
 
+
 class PwPage:
     def __init__(self, page: Page):
         self.page = page
