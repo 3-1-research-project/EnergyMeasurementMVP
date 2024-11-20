@@ -1,4 +1,4 @@
-import config
+import frontend_scenarios.config
 
 # from abc import ABC, abstractmethod
 
@@ -8,7 +8,7 @@ class Scenario:
     # constructor with url
     base: str
 
-    def __init__(self, page: config.PwPage, url: str):
+    def __init__(self, page: frontend_scenarios.config.PwPage, url: str):
         self.base = url
         self.page = page
 

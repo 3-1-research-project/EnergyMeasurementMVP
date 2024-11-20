@@ -1,10 +1,10 @@
-from scenario import Scenario
-import config
+from frontend_scenarios.scenario import Scenario
+import frontend_scenarios.config
 import logging
 
 
 class ScenarioParser(Scenario):
-    def __init__(self, page: config.PwPage, url: str, schema: dict):
+    def __init__(self, page: frontend_scenarios.config.PwPage, url: str, schema: dict):
         super().__init__(page, url)
         self.schema = schema
 

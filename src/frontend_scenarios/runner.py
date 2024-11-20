@@ -1,15 +1,18 @@
-from schema.parser import ScenarioParser
-from scenario_DevopsGroupC import DefaultScenario
+from frontend_scenarios.schema.parser import ScenarioParser
+from frontend_scenarios.config import PwPage
 from playwright.sync_api import sync_playwright
-from scenario_DevopsGroupC import PwPage
 import argparse
-from schema.schema import validate_schema
+from frontend_scenarios.schema.schema import validate_schema
 import logging
+from datetime import datetime
 
 
-def main(url, schema_path):
+def run(url, schema_path, headless=True, log_level=logging.INFO):
+    log_filename = datetime.now().strftime("logfile_%Y%m%d_%H%M%S.log")
+    logging.basicConfig(filename=log_filename, level=log_level)
+
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)
+        browser = p.chromium.launch(headless=headless)
         logging.debug("Browser launched")
         page = PwPage(browser.new_page())
         if schema_path != None:
@@ -20,9 +23,7 @@ def main(url, schema_path):
             logging.info("Running scenario...")
             scenario.run()
         else:
-            scenario = DefaultScenario(page, url)
-            logging.info("Running default scenario...")
-            scenario.run()
+            raise f"schema_path: {schema_path} does not exist"
 
         logging.info("Done")
         browser.close()
@@ -36,4 +37,4 @@ if __name__ == "__main__":
     logging.info("Running Playwright scenario")
     logging.info("Url: " + args.url)
     logging.info("Schema: " + args.schema)
-    main(args.url, args.schema)
+    run(args.url, args.schema)

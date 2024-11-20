@@ -2,6 +2,37 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "client-web-trigger-debugger",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "fastapi",
+            "args": [
+                "dev",
+                "web.py"
+            ],
+            "jinja": true,
+            "cwd": "${workspaceFolder}/src/"
+        },
+        {
+            "name": "frontend-scenario-debug",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "fastapi",
+            "args": [
+                "dev",
+                "web.py"
+            ],
+            "jinja": true,
+            "cwd": "${workspaceFolder}/src/"
+        },
+        {
+            "name": "chrome-launch",
+            "request": "launch",
+            "type": "chrome",
+            "url": "",
+            "webRoot": "${workspaceFolder}/frontend/"
+        },
+        {
             "name": "seed-debug",
             "type": "debugpy",
             "request": "launch",
