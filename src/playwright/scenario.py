@@ -88,7 +88,7 @@ class Scenario():
     def scenario(self):
         # --- New User Scenario ---
         self.getPublicTimeline()
-        self.goToUsersTimeline("test1")
+        #self.goToUsersTimeline("test1")
         self.signUp("test1", "test1@test.com","1234")
         self.signIn("test1", "1234")
         self.post()
