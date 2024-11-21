@@ -12,7 +12,7 @@ import subprocess
 SERVER_URL = "http://10.7.7.168" # change if needed
 DATABASE_URL = "http://10.7.7.146" # change if needed
 
-JSON_SCHEMA = "test_schema.json" # change if needed
+JSON_SCHEMA = "cs_schema.json" # change if needed
 
 CLIENT_1_URL = "http://10.0.0.3:5001/trigger" # pending change
 CLIENT_2_URL = "http://10.0.0.2:5001/trigger" # pending change
@@ -114,16 +114,27 @@ async def start_client(url):
     print(f"Starting scenario on {url}...", flush=True)
     timeout = httpx.Timeout(10.0, read=None)
     files = {'upload_file': open(JSON_SCHEMA, 'rb')}
-    name = "test_schema.json"
+    name = "cs_schema.json"
     async with httpx.AsyncClient() as client:
         return await client.post(f"{url}/schema/{name}/start", files=files, timeout=timeout)
+
+async def test_client(url):
+    print(f"TESTING scenario on {url}...", flush=True)
+    timeout = httpx.Timeout(10.0, read=None)
+    async with httpx.AsyncClient() as client:
+        return await client.get(f"{url}/schema/test_schema", timeout=timeout)
     
 async def send_schema(url):
     print(f"Sending schema to {url}")
     timeout = httpx.Timeout(10.0, read=None)
     files = {'upload_file': open(JSON_SCHEMA, 'rb')}
+    with open(JSON_SCHEMA, "r") as file:
+        schema = json.load(file)
+    print(schema)
+    a = {"schema":schema}
+    print(type(a))
     async with httpx.AsyncClient() as client:
-        return await client.post(f"{url}/schema", files=files, timeout=timeout)
+        return await client.post(f"{url}/schema/{JSON_SCHEMA}", json=a, timeout=timeout, headers={"Content-Type": "application/json"},)
 
 
 async def main(scenario_no, otii_project, device, out_path):
@@ -153,10 +164,12 @@ async def main(scenario_no, otii_project, device, out_path):
 
 if __name__ == "__main__":
     # Store it to "../data/out/minitwit3x"
+    
 
-    asyncio.run(start_client("https://webhook.site/3cc9b8cd-3799-4d2d-8f7f-f8093a5ca52d"))
+    response = asyncio.run(send_schema("http://10.7.7.128:8000"))
 
     print("done")
+    print(response)
 
     # out_path = Path("")
     # otii_project, device = configure_multimeter(create_otii_app())
