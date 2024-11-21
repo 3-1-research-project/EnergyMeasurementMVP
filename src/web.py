@@ -64,7 +64,7 @@ def schema_post(
     with open(file_path, "w") as file:
         file.write(json.dumps(schema))
 
-        return {"schema": json.dump(schema), "name": name}
+        return {"schema": json.dumps(schema), "name": name}
 
 
 @app.put("/schema/{name}", status_code=status.HTTP_200_OK)

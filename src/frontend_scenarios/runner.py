@@ -7,7 +7,7 @@ import logging
 from datetime import datetime
 
 
-def run(url, schema_path, headless=True, log_level=logging.INFO):
+def run(url, schema_path, headless=True, log_level=logging.WARNING):
     log_filename = datetime.now().strftime("logfile_%Y%m%d_%H%M%S.log")
     logging.basicConfig(filename=log_filename, level=log_level)
 
