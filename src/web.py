@@ -9,6 +9,7 @@ import subprocess
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import threading
 from frontend_scenarios.runner import run
+import asyncio
 
 NAME_DESCRIPTION = "The name of the schema file"
 NAME_EXAMPLE = "my-schema"
@@ -35,11 +36,11 @@ def get_schema_file_path_from_name(name: str):
 
 
 @app.post("/schema/{name}/start", status_code=status.HTTP_200_OK)
-def schema_start(
+async def schema_start(
     name: str = Path(..., description=NAME_DESCRIPTION, example=NAME_EXAMPLE),
     url: str = Body(..., description=URL_DESCRIPTION, example=URL_EXAMPLE),
 ):
-    run(url, get_schema_file_path_from_name(name))
+    await run(url, get_schema_file_path_from_name(name))
     return {"status": "Tests done"}
 
 

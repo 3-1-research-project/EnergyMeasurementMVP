@@ -8,7 +8,9 @@
             "module": "fastapi",
             "args": [
                 "dev",
-                "web.py"
+                "web.py",
+                "--host",
+                "0.0.0.0"
             ],
             "jinja": true,
             "cwd": "${workspaceFolder}/src/"

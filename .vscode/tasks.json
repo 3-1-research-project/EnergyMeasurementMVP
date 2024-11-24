@@ -26,6 +26,15 @@
                 "cwd": "${workspaceFolder}/database-seed/"
             },
             "problemMatcher": []
+        },
+        {
+            "label": "clean-logs",
+            "type": "shell",
+            "command": "rm logs/*",
+            "options": {
+                "cwd": "${workspaceFolder}/src/"
+            },
+            "problemMatcher": []
         }
     ],
     "inputs": [

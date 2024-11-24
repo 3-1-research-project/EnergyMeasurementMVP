@@ -1,4 +1,5 @@
 import frontend_scenarios.config
+import asyncio
 
 # from abc import ABC, abstractmethod
 
@@ -12,65 +13,68 @@ class Scenario:
         self.base = url
         self.page = page
 
-    def run(self):
-        self.scenario()
+    async def run(self):
+        await self.scenario()
 
     # PuT: Get the public timeline
-    def getPublicTimeline(self):
-        self.page.navigate_to(self.base + "public")
+    async def getPublicTimeline(self):
+        await self.page.navigate_to(self.base + "public")
 
     # SU: Sign up
-    def signUp(self, username, email, password):
+    async def signUp(self, username, email, password):
 
-        self.page.press_link("sign up")
+        await self.page.press_link("sign up")
 
-        self.page.fill_input("Username", username)  # Fails Here
+        await self.page.fill_input("Username", username)  # Fails Here
 
-        self.page.fill_input("Email", email)
+        await self.page.fill_input("Email", email)
 
-        self.page.fill_input("Password", password)
+        await self.page.fill_input("Password", password)
 
-        self.page.fill_input("Password2", password)
+        await self.page.fill_input("Password2", password)
 
-        self.page.submit()
+        await self.page.submit()
 
     # SO: Sign out
-    def signOut(self):
+    async def signOut(self):
 
-        self.page.press_link("Sign Out")
+        await self.page.press_link("Sign Out")
 
     # SI: Sign in
-    def signIn(self, username, password):
+    async def signIn(self, username, password):
 
-        self.page.navigate_to(self.base)
+        await self.page.navigate_to(self.base)
 
-        self.page.press_link("Sign In")
+        await self.page.press_link("Sign In")
 
-        self.page.fill_input("Username", username)
+        await self.page.fill_input("Username", username)
 
-        self.page.fill_input("Password", password)
+        await self.page.fill_input("Password", password)
 
-        self.page.submit_input()
+        await self.page.submit_input()
 
     # UsT: Get user's timeline
-    def goToUsersTimeline(self, user):
+    async def goToUsersTimeline(self, user):
 
-        self.getPublicTimeline()
+        await self.getPublicTimeline()
 
-        self.page.press_link(user)
+        await self.page.press_link(user)
 
     # MyT: My timeline
-    def goToMyTimeline(self):
+    async def goToMyTimeline(self):
 
-        self.page.navigate_to(self.base)
-        self.page.press_link("My Timeline")
+        await self.page.navigate_to(self.base)
+
+        await self.page.press_link("My Timeline")
 
     # MTW: Make tweet
-    def post(self):
+    async def post(self):
 
-        self.goToMyTimeline()
-        self.page.fill_input("text", "Hello, world!")
-        self.page.submit_input()
+        await self.goToMyTimeline()
+
+        await self.page.fill_input("text", "Hello, world!")
+
+        await self.page.submit_input()
 
     # FU: Follow user
     def followUser(self, user):
@@ -82,37 +86,37 @@ class Scenario:
 
         raise Exception("Not implemented")
 
-    def scenario(self):
+    async def scenario(self):
         # --- New User Scenario ---
-        self.getPublicTimeline()
-        self.signUp("testuser1", "testuser1@test.com", "1234")
-        self.signIn("testuser1", "1234")
-        self.post()
-        self.signOut()
-        self.signUp("testuser2", "testuser2@test.com", "4321")
-        self.signIn("testuser2", "4321")
-        self.post()
-        self.signOut()
-        self.goToUsersTimeline("testuser1")
+        await self.getPublicTimeline()
+        await self.signUp("testuser1", "testuser1@test.com", "1234")
+        await self.signIn("testuser1", "1234")
+        await self.post()
+        await self.signOut()
+        await self.signUp("testuser2", "testuser2@test.com", "4321")
+        await self.signIn("testuser2", "4321")
+        await self.post()
+        await self.signOut()
+        await self.goToUsersTimeline("testuser1")
         # -------------------------
         for i in range(10):
-            self.signIn(
+            await self.signIn(
                 "testuser1", "1234"
             )  # With seeded user login, Swap user1 and password1 with login information
-            self.goToMyTimeline()
-            self.getPublicTimeline()
+            await self.goToMyTimeline()
+            await self.getPublicTimeline()
             for i in range(3):
-                self.followUser("testuser2")
-                self.unfollowUser("testuser2")
-                self.post()
-            self.signOut()
-            self.signIn(
+                await self.followUser("testuser2")
+                await self.unfollowUser("testuser2")
+                await self.post()
+            await self.signOut()
+            await self.signIn(
                 "testuser2", "4321"
             )  # With seeded user login, Swap user1 and password1 with login information
-            self.goToMyTimeline()
-            self.getPublicTimeline()
+            await self.goToMyTimeline()
+            await self.getPublicTimeline()
             for i in range(3):
-                self.followUser("testuser1")
-                self.unfollowUser("testuser1")
-                self.post()
-            self.signOut()
+                await self.followUser("testuser1")
+                await self.unfollowUser("testuser1")
+                await self.post()
+            await self.signOut()

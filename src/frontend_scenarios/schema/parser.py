@@ -1,6 +1,7 @@
 from frontend_scenarios.scenario import Scenario
 import frontend_scenarios.config
 import logging
+import asyncio
 
 
 class ScenarioParser(Scenario):
@@ -8,72 +9,94 @@ class ScenarioParser(Scenario):
         super().__init__(page, url)
         self.schema = schema
 
-    def signUp(self, username, email, password):
-        self.parse(
+    async def signUp(self, username, email, password):
+        async def task():
+            await super(ScenarioParser, self).signUp(username, email, password),
+
+        await self.parse(
             "SIGN_UP",
-            lambda: super(ScenarioParser, self).signUp(username, email, password),
+            task,
             username=username,
             email=email,
             password=password,
         )
 
-    def followUser(self, user):
-        self.parse(
+    async def followUser(self, user):
+        async def task():
+            await super(ScenarioParser, self).followUser(user),
+
+        await self.parse(
             "FOLLOW_USER",
-            lambda: super(ScenarioParser, self).followUser(user),
+            task,
             user=user,
         )
 
-    def getPublicTimeline(self):
-        self.parse(
-            "GET_PUBLIC_TIMELINE",
-            lambda: super(ScenarioParser, self).getPublicTimeline(),
-        )
+    async def getPublicTimeline(self):
+        async def task():
+            await super(ScenarioParser, self).getPublicTimeline()
 
-    def signOut(self):
-        self.parse("SIGN_OUT", lambda: super(ScenarioParser, self).signOut())
+        await self.parse("GET_PUBLIC_TIMELINE", task)
 
-    def signIn(self, username, password):
-        self.parse(
+    async def signOut(self):
+        async def task():
+            await super(ScenarioParser, self).signOut()
+
+        await self.parse("SIGN_OUT", task)
+
+    async def signIn(self, username, password):
+        async def task():
+            await super(ScenarioParser, self).signIn(username, password),
+
+        await self.parse(
             "SIGN_IN",
-            lambda: super(ScenarioParser, self).signIn(username, password),
+            task,
             username=username,
             password=password,
         )
 
-    def goToUsersTimeline(self, user):
-        self.parse(
+    async def goToUsersTimeline(self, user):
+        async def task():
+            await super(ScenarioParser, self).goToUsersTimeline(user),
+
+        await self.parse(
             "GO_TO_USERS_TIMELINE",
-            lambda: super(ScenarioParser, self).goToUsersTimeline(user),
+            task,
             user=user,
         )
 
-    def goToMyTimeline(self):
-        self.parse(
-            "GO_TO_MY_TIMELINE", lambda: super(ScenarioParser, self).goToMyTimeline()
-        )
+    async def goToMyTimeline(self):
+        async def task():
+            await super(ScenarioParser, self).goToMyTimeline()
 
-    def post(self):
-        self.parse("POST", lambda: super(ScenarioParser, self).post())
+        await self.parse("GO_TO_MY_TIMELINE", task)
 
-    def unfollowUser(self, user):
-        self.parse(
+    async def post(self):
+        async def task():
+            await super(ScenarioParser, self).post()
+
+        await self.parse("POST", task)
+
+    async def unfollowUser(self, user):
+        async def task():
+            await super(ScenarioParser, self).unfollowUser(user),
+
+        await self.parse(
             "UNFOLLOW_USER",
-            lambda: super(ScenarioParser, self).unfollowUser(user),
+            task,
             user=user,
         )
 
-    def parse(self, task: str, alt: callable, **kwargs):
+    async def parse(self, task: str, alt: callable, **kwargs):
         tasks = self.schema.get("tasks")
         tasks = tasks.get(task)
         if tasks is None:
-            logging.debug("Executing default task %s", task, ", arguments:", kwargs)
-            alt()
+            logging.debug(f"Executing default task {task}, arguments: {kwargs}")
+            await alt()
         else:
-            logging.debug("Executing custom task %s", task, ", arguments:", kwargs)
-            self.parse_and_execute_subtasks(tasks, **kwargs)
+            logging.debug(f"Executing custom task {task}, arguments: {kwargs}")
+            await self.parse_and_execute_subtasks(tasks, **kwargs)
 
-    def parse_and_execute_subtasks(self, subtasks: dict, **kwargs):
+    async def parse_and_execute_subtasks(self, subtasks: dict, **kwargs):
         for subtask in subtasks:
             action, params = next(iter(subtask.items()))
 
@@ -81,21 +104,21 @@ class ScenarioParser(Scenario):
                 case "PRESS_LINK":
                     value = params.get("value")
                     if value is None:
-                        self.page.press_link(params.get("name"))
+                        await self.page.press_link(params.get("name"))
                     else:
-                        self.page.press_link(kwargs.get(value))
+                        await self.page.press_link(kwargs.get(value))
 
                 case "FILL_INPUT":
                     input_name = params.get("name")
                     value = params.get("value")
-                    self.page.fill_input(input_name, kwargs.get(value))
+                    await self.page.fill_input(input_name, kwargs.get(value))
                 case "SUBMIT":
-                    self.page.submit()
+                    await self.page.submit()
                 case "PRESS_BUTTON":
-                    self.page.press_button(params.get("name"))
+                    await self.page.press_button(params.get("name"))
                 case "SUBMIT_INPUT":
-                    self.page.submit_input()
+                    await self.page.submit_input()
                 case "NAVIGATE_TO":
-                    self.page.navigate_to(self.base + params.get("url"))
+                    await self.page.navigate_to(self.base + params.get("url"))
                 case _:
                     logging.error("%s Unknown action", action)
