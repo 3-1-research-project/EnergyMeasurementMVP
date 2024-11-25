@@ -50,7 +50,7 @@
             "program": "controller.py",
             "cwd": "${workspaceFolder}/controller/",
             "console": "integratedTerminal",
-            "args": ["http://localhost:8000", "schemas/cs_schema.json", "http://localhost:5000", "results"]
+            "args": ["http://localhost:8000", "schemas/test.json", "http://localhost:5000/", "results"]
         }
     ]
 }

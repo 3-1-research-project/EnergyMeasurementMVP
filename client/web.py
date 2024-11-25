@@ -1,5 +1,14 @@
 import os
-from fastapi import FastAPI, HTTPException, Request, Response, status, Path, Body
+from fastapi import (
+    FastAPI,
+    HTTPException,
+    Request,
+    Response,
+    status,
+    Path,
+    Body,
+)
+from fastapi.responses import JSONResponse
 import json
 from functools import wraps
 from fastapi.exceptions import RequestValidationError
@@ -31,14 +40,30 @@ create_folder_if_not_exists("schemas")
 app = FastAPI()
 
 
-async def catch_exceptions_middleware(request: Request, call_next):
-    try:
-        return await call_next(request)
-    except Exception as e:
-        return Response(str(e.args), status_code=500)
+@app.exception_handler(Exception)
+async def exception_handler(request: Request, exception: Exception):
+    return JSONResponse(
+        status_code=500,
+        content={"args": str(exception.args), "message": exception.message},
+    )
 
 
-app.middleware("http")(catch_exceptions_middleware)
+# async def catch_exceptions_middleware(request: Request, call_next):
+#     try:
+#         return await call_next(request)
+#     except Exception as e:
+#         raise HTTPException(
+#             status_code=500,
+#             detail={"args": str(e.args), "message": e.message},
+#         )
+#         # return Response(
+#         #     {"args": str(e.args), "message": e.message},
+#         #     status_code=500,
+#         #     headers={"Content-Type": "application/json"},
+#         # )
+
+
+# app.middleware("http")(catch_exceptions_middleware)
 
 
 def get_schema_file_path_from_name(name: str):

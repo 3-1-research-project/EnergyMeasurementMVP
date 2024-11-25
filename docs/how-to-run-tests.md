@@ -11,8 +11,8 @@ cd controller/
 python controller <comma seperated list of client urls> <path to schema file> <url of the minitwit application (server)> <output file name>
 ```
 
-An example could be
+An example could be. Note carefully exactly how to input parameters are formatted
 
 ```bash
-python controller http://10.7.7.167:8000,http://10.7.7.168:8000,http://10.7.7.169:8000 schemas/my_schema.json http://10.7.7.90:5000 descriptive_file_name
+python controller http://10.7.7.167:8000,http://10.7.7.168:8000,http://10.7.7.169:8000 schemas/my_schema.json http://10.7.7.90:5000/ descriptive_file_name
 ```

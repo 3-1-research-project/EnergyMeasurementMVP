@@ -12,5 +12,5 @@ pip install -r client/requirements.txt
 playwright install
 playwright install-deps
 
-echo "Settings up controller applicatino"
-pip install -r contoller/requirements.txt
+echo "Settings up controller application"
+pip install -r controller/requirements.txt 

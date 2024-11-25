@@ -30,9 +30,11 @@
         {
             "label": "clean-logs",
             "type": "shell",
-            "command": "rm logs/*",
-            "options": {
-                "cwd": "${workspaceFolder}/client/"
+            "linux": {
+                "command": "rm logs/*",
+                "options": {
+                    "cwd": "${workspaceFolder}/client/"
+                },
             },
             "problemMatcher": []
         }
