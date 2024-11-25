@@ -6,7 +6,7 @@ apt-get upgrade -y
 apt install python3-pip -y
 apt install python3-venv -y
 
-cd src/
+cd client/
 mkdir venv
 python3 -m venv venv/
 source venv/bin/activate
