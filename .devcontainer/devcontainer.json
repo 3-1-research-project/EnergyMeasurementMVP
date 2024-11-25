@@ -16,5 +16,6 @@
 				"ms-python.black-formatter"
 			]
 		}
-	}
+	},
+	"postCreateCommand": "bash .devcontainer/init.sh"
 }

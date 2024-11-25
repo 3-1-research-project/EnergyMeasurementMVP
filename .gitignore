@@ -1,5 +1,6 @@
 # Custom
-./logs/
+logs/
+controller/schemas/
 
 # Json
 .last-run.json

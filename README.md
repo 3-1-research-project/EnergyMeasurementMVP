@@ -19,3 +19,18 @@ This is work in progress
 
 ## Seeding the database
 For some scenarios, the database needs to be pre-seeded, which can be done using the [seed.py](/database-seed/README.md) script. For instructions on running the script, see the corresponding [README.md](/database-seed/README.md).
+
+## Running a test
+
+### Initial Setup
+
+1. Connect the Raspberry Pis as specified in the [connecting-devices.md](./docs/connecting-devices.md) document
+2. See [database-setup.md](./docs/database.md) for how to setup the database
+3. See [server-setup.md](./docs/server-setup.md) for how to setup the server
+4. See [client-setup.md](./docs/client-setup.md) for how to setup the client
+
+### Running the tests
+See [how-to-run-tests.md](./docs/how-to-run-tests.md) for how to run the tests
+
+### Collecting and Analyzing the Results
+See [collect-and-analyze-results.md](./docs/collect-and-analyze-results.md) for how to collect and analyze results

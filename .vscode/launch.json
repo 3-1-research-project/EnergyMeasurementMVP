@@ -13,7 +13,7 @@
                 "0.0.0.0"
             ],
             "jinja": true,
-            "cwd": "${workspaceFolder}/src/"
+            "cwd": "${workspaceFolder}/client/"
         },
         {
             "name": "frontend-scenario-debug",
@@ -25,7 +25,7 @@
                 "web.py"
             ],
             "jinja": true,
-            "cwd": "${workspaceFolder}/src/"
+            "cwd": "${workspaceFolder}/client/"
         },
         {
             "name": "chrome-launch",
@@ -42,6 +42,15 @@
             "cwd": "${workspaceFolder}/database-seed/",
             "console": "integratedTerminal",
             "args": ["<user register endpoint>", "<tweet endpoint>", "<amount of users>", "<tweet per user>"]
+        },
+        {
+            "name": "controller-debug",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "controller.py",
+            "cwd": "${workspaceFolder}/controller/",
+            "console": "integratedTerminal",
+            "args": ["http://localhost:8000", "schemas/cs_schema.json", "http://localhost:5000", "results"]
         }
     ]
 }
