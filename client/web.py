@@ -48,23 +48,6 @@ async def exception_handler(request: Request, exception: Exception):
     )
 
 
-# async def catch_exceptions_middleware(request: Request, call_next):
-#     try:
-#         return await call_next(request)
-#     except Exception as e:
-#         raise HTTPException(
-#             status_code=500,
-#             detail={"args": str(e.args), "message": e.message},
-#         )
-#         # return Response(
-#         #     {"args": str(e.args), "message": e.message},
-#         #     status_code=500,
-#         #     headers={"Content-Type": "application/json"},
-#         # )
-
-
-# app.middleware("http")(catch_exceptions_middleware)
-
 
 def get_schema_file_path_from_name(name: str):
     return os.path.join("schemas", f"{name}.json")
