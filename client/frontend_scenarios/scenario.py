@@ -60,9 +60,9 @@ class Scenario:
 
         await self.getPublicTimeline()
         await self.page.navigate_to(self.base + user)
-        
-        #Does not work - creates interleaving
-        #await self.page.press_link(user)
+
+        # Does not work - creates interleaving
+        # await self.page.press_link(user)
 
     # MyT: My timeline
     async def goToMyTimeline(self):
@@ -92,13 +92,13 @@ class Scenario:
 
     async def scenario(self):
         N = 8
-        username1 = ''.join(random.choices(string.ascii_uppercase, k=N))
+        username1 = "".join(random.choices(string.ascii_uppercase, k=N))
         username2 = username1 + "2"
-        password = 1234
+        password = "1234"
 
         email1 = username1 + "@test.com"
         email2 = username2 + "@test.com"
-        
+
         # --- New User Scenario ---
         await self.getPublicTimeline()
         await self.signUp(username1, email1, password)
