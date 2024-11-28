@@ -2,7 +2,6 @@ import frontend_scenarios.config
 import asyncio
 import string
 import random
-import time
 
 # from abc import ABC, abstractmethod
 
@@ -94,7 +93,7 @@ class Scenario:
     async def scenario(self):
         N = 8
         username1 = "".join(random.choices(string.ascii_uppercase, k=N))
-        username2 = username1 + "2"
+        username2 = "".join(random.choices(string.ascii_uppercase, k=N))
         password = "1234"
 
         email1 = username1 + "@test.com"
@@ -119,7 +118,6 @@ class Scenario:
             await self.goToMyTimeline()
             await self.getPublicTimeline()
             for i in range(3):
-                await self.goToUsersTimeline(username2)
                 await self.followUser(username2)
                 await self.unfollowUser(username2)
                 await self.post()
@@ -130,8 +128,6 @@ class Scenario:
             await self.goToMyTimeline()
             await self.getPublicTimeline()
             for i in range(3):
-                time.sleep(3)
-                await self.goToUsersTimeline(username1)
                 await self.followUser(username1)
                 await self.unfollowUser(username1)
                 await self.post()
