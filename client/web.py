@@ -1,25 +1,15 @@
-import os
 from fastapi import (
     FastAPI,
-    HTTPException,
     Request,
-    Response,
     status,
     Path,
     Body,
 )
 from fastapi.responses import JSONResponse
 import json
-from functools import wraps
-from fastapi.exceptions import RequestValidationError
-from fastapi.responses import PlainTextResponse
-from starlette.exceptions import HTTPException as StarletteHTTPException
-import subprocess
-from concurrent.futures import ThreadPoolExecutor, as_completed
-import threading
 from frontend_scenarios.runner import run
-import asyncio
 import os
+import logging
 
 NAME_DESCRIPTION = "The name of the schema file"
 NAME_EXAMPLE = "my-schema"
@@ -27,6 +17,7 @@ SCHEMA_DESCRIPTION = "The schema content"
 SCHEMA_EXAMPLE = {}
 URL_DESCRIPTION = "The url of the MiniTwit application"
 URL_EXAMPLE = "https://10.7.7.167:8080/"
+LOGGER = logging.getLogger("uvicorn")
 
 
 def create_folder_if_not_exists(folder_path):
@@ -46,7 +37,6 @@ async def exception_handler(request: Request, exception: Exception):
         status_code=500,
         content={"args": str(exception.args), "message": exception.message},
     )
-
 
 
 def get_schema_file_path_from_name(name: str):

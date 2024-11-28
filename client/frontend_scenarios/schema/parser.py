@@ -5,6 +5,8 @@ import asyncio
 
 
 class ScenarioParser(Scenario):
+    logger = logging.getLogger("uvicorn")
+
     def __init__(self, page: frontend_scenarios.config.PwPage, url: str, schema: dict):
         super().__init__(page, url)
         self.schema = schema
@@ -90,10 +92,10 @@ class ScenarioParser(Scenario):
         tasks = self.schema.get("tasks")
         tasks = tasks.get(task)
         if tasks is None:
-            logging.debug(f"Executing default task {task}, arguments: {kwargs}")
+            self.logger.info(f"Executing default task {task}, arguments: {kwargs}")
             await alt()
         else:
-            logging.debug(f"Executing custom task {task}, arguments: {kwargs}")
+            self.logger.info(f"Executing custom task {task}, arguments: {kwargs}")
             await self.parse_and_execute_subtasks(tasks, **kwargs)
 
     async def parse_and_execute_subtasks(self, subtasks: dict, **kwargs):
@@ -121,4 +123,4 @@ class ScenarioParser(Scenario):
                 case "NAVIGATE_TO":
                     await self.page.navigate_to(self.base + params.get("url"))
                 case _:
-                    logging.error("%s Unknown action", action)
+                    self.logger.error("%s Unknown action", action)
