@@ -118,6 +118,7 @@ class Scenario:
             await self.goToMyTimeline()
             await self.getPublicTimeline()
             for i in range(3):
+                await self.goToUsersTimeline(username2)
                 await self.followUser(username2)
                 await self.unfollowUser(username2)
                 await self.post()
@@ -128,6 +129,7 @@ class Scenario:
             await self.goToMyTimeline()
             await self.getPublicTimeline()
             for i in range(3):
+                await self.goToUsersTimeline(username1)
                 await self.followUser(username1)
                 await self.unfollowUser(username1)
                 await self.post()
