@@ -2,6 +2,7 @@ import frontend_scenarios.config
 import asyncio
 import string
 import random
+import json
 
 # from abc import ABC, abstractmethod
 
@@ -15,8 +16,8 @@ class Scenario:
         self.base = url
         self.page = page
 
-    async def run(self):
-        await self.scenario()
+    async def run(self, schema_path):
+        await self.scenario(schema_path)
 
     # PuT: Get the public timeline
     async def getPublicTimeline(self):
@@ -90,7 +91,7 @@ class Scenario:
 
         raise Exception("Not implemented")
 
-    async def scenario(self):
+    async def scenario(self, schema_path):
         N = 8
         username1 = "".join(random.choices(string.ascii_uppercase, k=N))
         username2 = "".join(random.choices(string.ascii_uppercase, k=N))
@@ -98,6 +99,13 @@ class Scenario:
 
         email1 = username1 + "@test.com"
         email2 = username2 + "@test.com"
+
+        # config = {}
+        # with open(schema_path, "r") as file:
+        #     config = json.load(file)
+
+        # username1_path = config.get("config", {}).get("USER_PATH", "") + username1
+        # username2_path = config.get("config", {}).get("USER_PATH", "") + username2
 
         # --- New User Scenario ---
         await self.getPublicTimeline()
@@ -109,7 +117,6 @@ class Scenario:
         await self.signIn(username2, password)
         await self.post()
         await self.signOut()
-        await self.goToUsersTimeline(username1)
         # -------------------------
         for i in range(10):
             await self.signIn(

@@ -48,7 +48,7 @@ class OtiiService:
 
         return project, device
 
-    def collect_data(seld, otii_project, device, schema_path):
+    def collect_data(self, otii_project, device, schema_path):
         # Get statistics for the recording
         recording = otii_project.get_last_recording()
         # info = recording.get_channel_info(device.id, "mc")
@@ -65,16 +65,18 @@ class OtiiService:
         power_data = recording.get_channel_data(device.id, "mp", 0, power_count)
 
         print("data count")
-        print("current: " + current_count)
-        print("voltage: " + voltage_count)
-        print("power: " + power_count)
+        print("current: " + str(current_count))
+        print("voltage: " + str(voltage_count))
+        print("power: " + str(power_count))
 
         data = {}
         data["current"] = current_data
         data["voltage"] = voltage_data
         data["power"] = power_data
-        data["time"] = [i / 10000 for i in range(current_count)] # 10000 is the sample rate
- 
+        data["time"] = [
+            i / 10000 for i in range(current_count)
+        ]  # 10000 is the sample rate
+
         # Get the current timestamp
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
