@@ -2,6 +2,7 @@ import frontend_scenarios.config
 import asyncio
 import string
 import random
+import time
 
 # from abc import ABC, abstractmethod
 
@@ -129,6 +130,7 @@ class Scenario:
             await self.goToMyTimeline()
             await self.getPublicTimeline()
             for i in range(3):
+                time.sleep(3)
                 await self.goToUsersTimeline(username1)
                 await self.followUser(username1)
                 await self.unfollowUser(username1)
