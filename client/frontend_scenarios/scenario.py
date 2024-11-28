@@ -1,5 +1,7 @@
 import frontend_scenarios.config
 import asyncio
+import string
+import random
 
 # from abc import ABC, abstractmethod
 
@@ -57,8 +59,10 @@ class Scenario:
     async def goToUsersTimeline(self, user):
 
         await self.getPublicTimeline()
-
-        await self.page.press_link(user)
+        await self.page.navigate_to(self.base + user)
+        
+        #Does not work - creates interleaving
+        #await self.page.press_link(user)
 
     # MyT: My timeline
     async def goToMyTimeline(self):
@@ -87,36 +91,44 @@ class Scenario:
         raise Exception("Not implemented")
 
     async def scenario(self):
+        N = 8
+        username1 = ''.join(random.choices(string.ascii_uppercase, k=N))
+        username2 = username1 + "2"
+        password = 1234
+
+        email1 = username1 + "@test.com"
+        email2 = username2 + "@test.com"
+        
         # --- New User Scenario ---
         await self.getPublicTimeline()
-        await self.signUp("testuser1", "testuser1@test.com", "1234")
-        await self.signIn("testuser1", "1234")
+        await self.signUp(username1, email1, password)
+        await self.signIn(username1, password)
         await self.post()
         await self.signOut()
-        await self.signUp("testuser2", "testuser2@test.com", "4321")
-        await self.signIn("testuser2", "4321")
+        await self.signUp(username2, email2, password)
+        await self.signIn(username2, password)
         await self.post()
         await self.signOut()
-        await self.goToUsersTimeline("testuser1")
+        await self.goToUsersTimeline(username1)
         # -------------------------
         for i in range(10):
             await self.signIn(
-                "testuser1", "1234"
+                username1, password
             )  # With seeded user login, Swap user1 and password1 with login information
             await self.goToMyTimeline()
             await self.getPublicTimeline()
             for i in range(3):
-                await self.followUser("testuser2")
-                await self.unfollowUser("testuser2")
+                await self.followUser(username2)
+                await self.unfollowUser(username2)
                 await self.post()
             await self.signOut()
             await self.signIn(
-                "testuser2", "4321"
+                username2, password
             )  # With seeded user login, Swap user1 and password1 with login information
             await self.goToMyTimeline()
             await self.getPublicTimeline()
             for i in range(3):
-                await self.followUser("testuser1")
-                await self.unfollowUser("testuser1")
+                await self.followUser(username1)
+                await self.unfollowUser(username1)
                 await self.post()
             await self.signOut()

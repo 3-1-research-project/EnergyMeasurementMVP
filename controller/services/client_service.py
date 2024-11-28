@@ -34,10 +34,10 @@ class ClientService:
                 self.temp_print_error(e)
                 return False
 
-    def start_scenario(self, schema_name, minitwit_url) -> bool:
-        with httpx.Client() as client:
+    async def start_scenario(self, schema_name, minitwit_url) -> bool:
+        async with httpx.AsyncClient() as client:
             try:
-                response = client.post(
+                response = await client.post(
                     f"{self.url}/schema/{schema_name}/start",
                     content=minitwit_url,
                     timeout=None,
