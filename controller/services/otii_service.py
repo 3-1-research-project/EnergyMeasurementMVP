@@ -95,7 +95,7 @@ class OtiiService:
                 ]
 
                 # add to csv
-                for i in range(1000):
+                for i in range(len(current_data)):
                     data_writer.writerow(
                         [
                             (index + i) / 10000,
@@ -105,6 +105,6 @@ class OtiiService:
                         ]
                     )
 
-                index += 1000
+                index += len(current_data)
 
         print(f"Data saved to {filename}!")
