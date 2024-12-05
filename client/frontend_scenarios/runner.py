@@ -32,7 +32,7 @@ async def run(url, schema_path, headless=True, log_level=logging.INFO):
             logger.info("Schema validated: " + str(validated_schema["project"]))
             scenario = ScenarioParser(page, url, validated_schema)
             logger.info("Running scenario...")
-            await scenario.run()
+            await scenario.run(schema_path)
         else:
             raise f"schema_path: {schema_path} does not exist"
 
