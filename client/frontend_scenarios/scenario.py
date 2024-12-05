@@ -73,11 +73,11 @@ class Scenario:
         await self.page.press_link("My Timeline")
 
     # MTW: Make tweet
-    async def post(self):
+    async def post(self, input):
 
         await self.goToMyTimeline()
 
-        await self.page.fill_input("text", "Hello, world!")
+        await self.page.fill_input("text", input)
 
         await self.page.submit_input()
 
@@ -111,11 +111,11 @@ class Scenario:
         await self.getPublicTimeline()
         await self.signUp(username1, email1, password)
         await self.signIn(username1, password)
-        await self.post()
+        await self.post("Hello World")
         await self.signOut()
         await self.signUp(username2, email2, password)
         await self.signIn(username2, password)
-        await self.post()
+        await self.post("Hello World")
         await self.signOut()
         # -------------------------
         for i in range(10):
@@ -127,7 +127,7 @@ class Scenario:
             for i in range(3):
                 await self.followUser(username2)
                 await self.unfollowUser(username2)
-                await self.post()
+                await self.post("Hello World")
             await self.signOut()
             await self.signIn(
                 username2, password
@@ -137,5 +137,5 @@ class Scenario:
             for i in range(3):
                 await self.followUser(username1)
                 await self.unfollowUser(username1)
-                await self.post()
+                await self.post("Hello World")
             await self.signOut()

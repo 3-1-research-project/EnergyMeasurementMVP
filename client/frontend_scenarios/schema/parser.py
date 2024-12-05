@@ -72,11 +72,11 @@ class ScenarioParser(Scenario):
 
         await self.parse("GO_TO_MY_TIMELINE", task)
 
-    async def post(self):
+    async def post(self, input):
         async def task():
-            await super(ScenarioParser, self).post()
+            await super(ScenarioParser, self).post(input)
 
-        await self.parse("POST", task)
+        await self.parse("POST", task, input=input)
 
     async def unfollowUser(self, user):
         async def task():
