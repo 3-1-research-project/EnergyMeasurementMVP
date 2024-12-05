@@ -3,109 +3,32 @@
     "url": "https://localhost:15000",
     "tasks": {
         "SIGN_UP": [
-                {
-                    "PRESS_LINK": {
-                        "name": "Sign Up"
-                    }
-                },
-                {
-                    "FILL_INPUT": {
-                        "name": "username",
-                        "value": "username"
-                    }
-                },
-                {
-                    "FILL_INPUT": {
-                        "name": "email",
-                        "value": "email"
-                    }
-                },
-                {
-                    "FILL_INPUT": {
-                        "name": "password",
-                        "value": "password"
-                    }
-                },
-                {
-                    "FILL_INPUT": {
-                        "name": "password2",
-                        "value": "password"
-                    }
-                },
-                {
-                    "SUBMIT_INPUT": {}
-                }
-
-            ],
+            { "PRESS_LINK": { "name": "Sign Up" } },
+            { "FILL_INPUT": { "name": "username", "value": "username" } },
+            { "FILL_INPUT": { "name": "email", "value": "email" } },
+            { "FILL_INPUT": { "name": "password", "value": "password" } },
+            { "FILL_INPUT": { "name": "password2", "value": "password" } },
+            { "SUBMIT_INPUT": {} }
+        ],
         "SIGN_IN": [
-            {
-                "NAVIGATE_TO": {
-                    "url": "public"
-                }
-            },
-            {
-                "PRESS_LINK": {
-                    "name": "Sign In"
-                }
-            },
-            {
-                "FILL_INPUT": {
-                    "name": "username",
-                    "value": "username"
-                }
-            },
-            {
-                "FILL_INPUT": {
-                    "name": "password",
-                    "value": "password"
-                }
-            },
-            {
-                "SUBMIT_INPUT": {}
-            }
+            { "NAVIGATE_TO": { "url": "public" } },
+            { "PRESS_LINK": { "name": "Sign In" } },
+            { "FILL_INPUT": { "name": "username", "value": "username" } },
+            { "FILL_INPUT": { "name": "password", "value": "password" } },
+            { "SUBMIT_INPUT": {} }
         ],
         "SIGN_OUT": [
-            {
-                "PRESS_LINK": {
-                    "name": "logout"
-                }
-            }
+            { "PRESS_LINK": { "name": "logout" } }
         ],
         "FOLLOW_USER": [
-                {
-                    "NAVIGATE_TO": {
-                        "url": "public"
-                    }
-                },
-                {
-                    "PRESS_LINK": {
-                        "name": "",
-                        "value": "user"
-                    }
-                },
-                {
-                    "PRESS_LINK": {
-                        "name": "Follow user"
-                    }
-                }
+            { "NAVIGATE_TO": { "url": "public" } },
+            { "PRESS_LINK": { "name": "", "value": "user" } },
+            { "PRESS_LINK": { "name": "Follow user" } }
         ],
         "UNFOLLOW_USER": [
-                {
-                    "NAVIGATE_TO": {
-                        "url": "public"
-                    }
-                },
-                {
-                    "PRESS_LINK": {
-                        "name": "",
-                        "value": "user"
-                    }
-                },
-                {
-                    "PRESS_LINK": {
-                        "name": "Unfollow user"
-                    }
-                }
+            { "NAVIGATE_TO": { "url": "public" } },
+            { "PRESS_LINK": { "name": "", "value": "user" } },
+            { "PRESS_LINK": { "name": "Unfollow user" } }
         ]
     }
 }
