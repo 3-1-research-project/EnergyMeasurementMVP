@@ -8,8 +8,7 @@ import os
 import json
 
 
-
-async def run(urls: str, schema_path: str, minitwit_url: str, output_csv_name: str):
+async def run(urls: str, schema_path: str, minitwit_url: str):
 
     async def start_scenario_for_client(client_service: ClientService):
         return await client_service.start_scenario(
@@ -41,7 +40,7 @@ async def run(urls: str, schema_path: str, minitwit_url: str, output_csv_name: s
     print("starting recording")
     otii_project.start_recording()
 
-    time.sleep(5) # 5 sec delay to get baseline power consumption
+    time.sleep(5)  # 5 sec delay to get baseline power consumption
 
     for i in range(5):
         print(f"Starting scenario {i}")
@@ -74,10 +73,5 @@ if __name__ == "__main__":
     )
     parser.add_argument("schema_path", help="Path to the schema used for the scenario")
     parser.add_argument("minitwit_url", help="Url of the MiniTwit application")
-    parser.add_argument(
-        "output_csv_name",
-        help="Name of final results in csv format",
-        default="results",
-    )
     args = parser.parse_args()
-    asyncio.run(run(args.client_urls, args.schema_path, args.minitwit_url, args.output_csv_name))
+    asyncio.run(run(args.client_urls, args.schema_path, args.minitwit_url))

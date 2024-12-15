@@ -4,9 +4,9 @@
 	"features": {
 		"ghcr.io/devcontainers/features/python:1": {}
 	},
-	"runArgs": [
-		"--network=host"
-	],
+	// "runArgs": [
+	// 	"--network=host"
+	// ],
 	"customizations": {
 		"vscode": {
 			"extensions": [

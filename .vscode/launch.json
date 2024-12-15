@@ -36,7 +36,7 @@
             "program": "controller.py",
             "cwd": "${workspaceFolder}/controller/",
             "console": "integratedTerminal",
-            "args": ["http://10.7.7.185:8000,http://10.7.7.128:8000,http://10.7.7.176:8000", "schemas/test.json", "http://10.7.7.168:5000/", "results"]
+            "args": ["http://10.7.7.186:8000,http://10.7.7.128:8000,http://10.7.7.176:8000", "schemas/cs_schema.json", "http://10.7.7.168:5000/", "results"]
         }
     ]
 }

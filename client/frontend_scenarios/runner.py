@@ -10,7 +10,7 @@ import asyncio
 from playwright.async_api import async_playwright
 
 
-async def run(url, schema_path, headless=True, log_level=logging.INFO):
+async def run(url, schema_path, headless=False, log_level=logging.INFO):
     logger = logging.getLogger("uvicorn")
     logger.setLevel(log_level)
     formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")

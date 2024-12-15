@@ -13,4 +13,4 @@ python seed.py <user register endpoint> <tweet endpoint> <amount of users> <twee
 ```
 
 ## How to debug
-If you want to debug this program and are using VS code, open [../launch.json](../.vscode/launch.json) and fill out the args field with the corresponding fields for your running Minitwit application. (Uou can find it by looking for `"name": "seed-debug"`)
+If you want to debug this program and are using VS code, open [../launch.json](../.vscode/launch.json) and fill out the args field with the corresponding fields for your running MiniTwit application. (You can find it by looking for `"name": "seed-debug"`)

@@ -16,3 +16,7 @@ The container can be entered either through bash `docker exec -it postgres` or u
 The connection string of the container is:
 
 `UserID=postgres;Password=1234;Host=localhost;Port=5432;Database=postgres;Pooling=true;MinPoolSize=0;MaxPoolSize=100;ConnectionLifetime=0;`
+
+## Scripts
+
+To setup the database, run the following script [./scripts/database/setup-database.sh](./scripts/database/setup-database.sh)
