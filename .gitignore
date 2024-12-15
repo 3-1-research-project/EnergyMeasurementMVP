@@ -1,3 +1,7 @@
+# Custom
+logs/
+schemas/
+
 # Json
 .last-run.json
 

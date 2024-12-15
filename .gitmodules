@@ -1,6 +1,3 @@
-[submodule "minitwit-implementations/DevopsGroupC"]
-	path = minitwit-implementations/DevopsGroupC
-	url = https://github.com/3-1-research-project/DevopsGroupC.git
 [submodule "minitwit-implementations/MinitwitGroupl"]
 	path = minitwit-implementations/MinitwitGroupl
 	url = https://github.com/3-1-research-project/MinitwitGroupl.git

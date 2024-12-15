@@ -17,8 +17,8 @@
             "command": "python",
             "args": [
                 "seed.py",
-                "${input:registerUserEndpoint}",
-                "${input:tweetEndpoint}",
+                "${input:url}${input:registerUserEndpoint}",
+                "${input:url}${input:tweetEndpoint}",
                 "${input:userAmount}",
                 "${input:tweetPerUserAmount}"
             ],
@@ -26,20 +26,37 @@
                 "cwd": "${workspaceFolder}/database-seed/"
             },
             "problemMatcher": []
+        },
+        {
+            "label": "clean-logs",
+            "type": "shell",
+            "linux": {
+                "command": "rm logs/*",
+                "options": {
+                    "cwd": "${workspaceFolder}/client/"
+                },
+            },
+            "problemMatcher": []
         }
     ],
     "inputs": [
             {
+                "id": "url",
+                "type": "promptString",
+                "description": "Enter the register user endpoint URL",
+                "default": "http://localhost:5000"
+            },
+            {
                 "id": "registerUserEndpoint",
                 "type": "promptString",
                 "description": "Enter the register user endpoint URL",
-                "default": "http://localhost:5000/api/register"
+                "default": "/api/register"
             },
             {
                 "id": "tweetEndpoint",
                 "type": "promptString",
                 "description": "Enter the tweet endpoint URL",
-                "default": "http://localhost:5000/api/msgs"
+                "default": "/api/msgs"
             },
             {
                 "id": "userAmount",
