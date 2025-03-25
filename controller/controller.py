@@ -8,7 +8,7 @@ import os
 import json
 
 
-async def run(urls: str, schema_path: str, minitwit_url: str):
+async def run(urls: str, schema_path: str, minitwit_url: str, num_cores: str):
 
     async def start_scenario_for_client(client_service: ClientService):
         return await client_service.start_scenario(
@@ -19,7 +19,20 @@ async def run(urls: str, schema_path: str, minitwit_url: str):
 
     otii_project, device = otii_service.configure_multimeter()
 
-    client_services = [ClientService(url=url) for url in urls]
+    url_list = urls.split(",")
+    new_list = []
+    for url in urls:
+        url = url.strip()
+        for i in range(int(num_cores)):
+
+            list_chars = list(url)
+            list_chars[-1] = str(int(list_chars[-1]) + i)
+            new_url = "".join(list_chars)
+            new_list.append(new_url)
+
+    print(new_list)
+
+    client_services = [ClientService(url=url) for url in new_list]
 
     schema_name = os.path.splitext(os.path.basename(schema_path))[0]
     schema_content = get_json_data(schema_path=schema_path)
@@ -73,5 +86,10 @@ if __name__ == "__main__":
     )
     parser.add_argument("schema_path", help="Path to the schema used for the scenario")
     parser.add_argument("minitwit_url", help="Url of the MiniTwit application")
+    parser.add_argument(
+        "num_cores", help="Number of cores to use for the test in each client"
+    )
     args = parser.parse_args()
-    asyncio.run(run(args.client_urls, args.schema_path, args.minitwit_url))
+    asyncio.run(
+        run(args.client_urls, args.schema_path, args.minitwit_url, args.num_cores)
+    )
