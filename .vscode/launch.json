@@ -27,7 +27,12 @@
             "program": "seed.py",
             "cwd": "${workspaceFolder}/database-seed/",
             "console": "integratedTerminal",
-            "args": ["<user register endpoint>", "<tweet endpoint>", "<amount of users>", "<tweet per user>"]
+            "args": [
+                "<user register endpoint>",
+                "<tweet endpoint>",
+                "<amount of users>",
+                "<tweet per user>"
+            ]
         },
         {
             "name": "controller",
@@ -36,7 +41,11 @@
             "program": "controller.py",
             "cwd": "${workspaceFolder}/controller/",
             "console": "integratedTerminal",
-            "args": ["http://10.7.7.186:8000,http://10.7.7.128:8000,http://10.7.7.176:8000", "schemas/cs_schema.json", "http://10.7.7.168:5000/", "results"]
+            "args": [
+                "http://10.7.7.175:5000,http://10.7.7.167:5000,http://10.7.7.197:5000",
+                "http://10.7.7.127:5000/",
+                "4"
+            ]
         }
     ]
 }
