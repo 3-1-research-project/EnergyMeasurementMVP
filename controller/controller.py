@@ -54,7 +54,7 @@ async def run(urls: str, minitwit_url: str, num_cores: str):
     
 
     # Raspberry Pi SSH details
-    HOST = "10.7.7.128" # minitwit_url # "10.7.7.128" 
+    HOST = minitwit_url.split("//")[1].split(":")[0] # "10.7.7.128" # minitwit_url # "10.7.7.128" 
     USERNAME = "admin"
     PASSWORD = "admin"  # Use SSH keys instead of passwords if possible!
 
@@ -80,18 +80,25 @@ async def run(urls: str, minitwit_url: str, num_cores: str):
         else:
             raise ValueError("Failed to retrieve valid temperature data.")
 
-    data_name = "python-flask-B-true"
+    # TODO remember to update data name
+    data_name = "dotnet-baseline-sanity"
 
-    print("collecting temperature data pre experiment")
-    temperature_data_pre_experiment = get_raspberry_pi_temp()
-    print("Pre experiment temp: " + str(temperature_data_pre_experiment))
+    print("Starting Experiment")
+    print(f"For data_name: {data_name}")
+    print(f"On Host: {HOST}")
 
-    print("starting recording")
-    otii_project.start_recording()
+    for i in range(5): 
 
-    time.sleep(5)  # 5 sec delay to get baseline power consumption
+        print(f"Collecting temperature data pre experiment {i}")
+        temperature_data_pre_experiment = get_raspberry_pi_temp()
+        print("Pre experiment temp: " + str(temperature_data_pre_experiment))
 
-    for i in range(1): # TODO temp set to 1 instead of 5 to test
+        print(f"Starting recording {i}")
+        otii_project.start_recording()
+
+        time.sleep(5)  # 5 sec delay to get baseline power consumption
+
+    
         print(f"Starting scenario {i}")
 
         results = await asyncio.gather(*map(start_scenario_for_client, client_services))
@@ -102,17 +109,25 @@ async def run(urls: str, minitwit_url: str, num_cores: str):
             otii_project.stop_recording()
             return
 
-    otii_project.stop_recording()
-    print("done recording")
+        otii_project.stop_recording()
+        print(f"Done recording {i}")
 
-    print("collecting temperature data post experiment")
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    with open(f"{data_name}_temperature_{timestamp}.csv", "w") as file:
-        file.write(f"CPU Temperature Pre experiment: {temperature_data_pre_experiment}°C\n")
-        file.write(f"CPU Temperature Post experiment: {get_raspberry_pi_temp()}°C\n")
+        print(f"Collecting temperature data post experiment {i}")
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        with open(f"{data_name}_temperature_{i}_{timestamp}.csv", "w") as file:
+            file.write(f"CPU Temperature Pre experiment: {temperature_data_pre_experiment}°C\n")
+            file.write(f"CPU Temperature Post experiment: {get_raspberry_pi_temp()}°C\n")
 
-    
-    otii_service.collect_data(otii_project, device, data_name)
+        print("Clearing Database")
+        # TODO get DB URL from somewhere?? 
+        database_string="postgresql://user:password@10.7.7.184:5432/waect"
+        db_cleared = await client_services[0].clear_db(database_string)
+        if(db_cleared):
+            print("DB Cleared successfully")
+        else: 
+            print("Error Clearing the DB")
+        
+        otii_service.collect_data(otii_project, device, data_name, i)
 
 
 def get_json_data(data_name: str):

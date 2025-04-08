@@ -1,6 +1,7 @@
 # Custom
 logs/
 schemas/
+.csv
 
 # Json
 .last-run.json
