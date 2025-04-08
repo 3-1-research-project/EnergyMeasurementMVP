@@ -49,3 +49,18 @@ class ClientService:
             except Exception as e:
                 self.temp_print_error(e)
                 return False
+
+    async def clear_db(self, database_string) -> bool: 
+        async with httpx.AsyncClient() as client: 
+            try:
+                response = await client.post(
+                    f"{self.url}/cleardb",
+                    content=database_string,
+                    timeout=None,
+                    headers={"Content-Type": "text/plain"},
+                )
+
+                return self.is_response_success(response)
+            except Exception as e:
+                self.temp_print_error(e)
+                return False

@@ -54,6 +54,7 @@ class OtiiService:
         otii_project: otii_application.project.Project,
         device: otii_arc.Arc,
         schema_path: str,
+        iteration: int,
     ):
         # Get statistics for the recording
 
@@ -70,7 +71,7 @@ class OtiiService:
         # Create a CSV file
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         schema = schema_path.split("/")[-1].split(".")[0]
-        filename = f"{schema}_{timestamp}.csv"
+        filename = f"{schema}_{iteration}_{timestamp}.csv"
 
         with open(filename, mode="w") as data_file:
             # Header
