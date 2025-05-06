@@ -81,7 +81,7 @@ async def run(urls: str, minitwit_url: str, num_cores: str):
             raise ValueError("Failed to retrieve valid temperature data.")
 
     # TODO remember to update data name
-    data_name = "dotnet-baseline-sanity"
+    data_name = "ruby-yjit"
 
     print("Starting Experiment")
     print(f"For data_name: {data_name}")
